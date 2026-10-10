@@ -1,34 +1,32 @@
 # CML Local Alpha 0.1 — Continuity Validator
 
 A dependency-free local app for creating and checking CML continuity documents.
-**Local-only static validation: no runtime execution, rendering, timing
-verification, physical execution, or launch authority.** A PASS means the
-compiler accepted the document's static rules. Plans, IR, and unsigned receipts
-are inspection artifacts. No cloud, account, telemetry, or package installation
-is required.
+**Local-only static validation.** A PASS means static acceptance by CML Reference Compiler 1.2.0-alpha.0 only. It does not establish runtime execution, rendering, timing verification, safety certification, human-behavior proof, deployment, or launch authority.
 
-For the project history, evidence boundaries, and long-term research direction, read [CML: Historical Context and Research Direction](WHY_CML.md).\n\nRequires Node.js 18.19 or newer.
+No cloud, account, telemetry, or package installation is required. See
+[WHY_CML.md](WHY_CML.md) for project history, provenance limits, and evidence boundaries.
 
-## Windows + WSL Start
+## Windows + WSL start
 
-Use an existing Windows 10/11 system with WSL 2, an Ubuntu distribution, a non-root default WSL user, Windows PowerShell 5.1, and a modern browser. WSL must have Node.js ≥ 18.19, bash, flock, and tar available (nvm installations are supported). WSL interoperability and localhost forwarding must work. Port 4180 must be free or already serving this application.
+Use existing Windows 10/11 with WSL 2, Ubuntu, a non-root default WSL user,
+Windows PowerShell 5.1, and a modern browser. WSL needs Node.js >=18.19, bash,
+flock, and tar; existing nvm installations are supported. WSL interoperability
+and localhost forwarding must work. Port 4180 must be available or already
+serving this app. Complete setup is in [TESTER_README.md](TESTER_README.md).
 
-Complete tester-oriented instructions are in [TESTER_README.md](TESTER_README.md).
-
-### Verify and extract
-
-Verify the prerelease archive against its adjacent `.sha256` file:
+Verify the downloaded prerelease archive against its adjacent `.sha256` file
+using Windows PowerShell:
 
 ```powershell
-Get-FileHash .\cml-local-alpha-0.1.0-alpha.1.tar.gz -Algorithm SHA256
+Get-FileHash .\cml-local-alpha-0.1.0-alpha.2.tar.gz -Algorithm SHA256
 ```
 
 In WSL, replace `YOUR_WINDOWS_USER` and the archive path with your own:
 
 ```bash
 mkdir -p "$HOME/cml-tester"
-tar -xzf /mnt/c/Users/YOUR_WINDOWS_USER/Downloads/cml-local-alpha-0.1.0-alpha.1.tar.gz -C "$HOME/cml-tester"
-cd "$HOME/cml-tester/cml-local-alpha-0.1.0-alpha.1"
+tar -xzf /mnt/c/Users/YOUR_WINDOWS_USER/Downloads/cml-local-alpha-0.1.0-alpha.2.tar.gz -C "$HOME/cml-tester"
+cd "$HOME/cml-tester/cml-local-alpha-0.1.0-alpha.2"
 node --version
 command -v bash flock tar
 explorer.exe "$(wslpath -w "$PWD/desktop")"
@@ -76,9 +74,9 @@ The unchanged compiler snapshot is CML Reference Compiler `1.2.0-alpha.0`.
 and notices are under `vendor/compiler/`. No robotics telemetry, launch control,
 or benchmark components are included.
 
-Receipts contain exact source, SHA-256 digests, diagnostics, normalized state,
-and compiler provenance. They are unsigned local records. From your extracted
-project directory, replace the receipt path with your downloaded file:
+Receipts are unsigned reproducibility records and may contain complete current and last-accepted source. Sanitize personal, proprietary, and research content before public sharing. Offline verification checks internal consistency with the bundled compiler, not authorship, time, custody, or external execution. Editing a receipt breaks its digest; use sample-only receipts for reproducible reports, or share a clearly labeled sanitized excerpt rather than claiming it is the original verified receipt.
+
+From your extracted project directory, use the actual downloaded receipt path:
 
 ```bash
 node verify-receipt.js /mnt/c/Users/YOUR_WINDOWS_USER/Downloads/RECEIPT.json

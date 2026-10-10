@@ -1,133 +1,55 @@
-# CML: Historical Context and Research Direction
+# Why CML Local Alpha: project history and evidence boundaries
 
-> Research record maintained by **xSQUIB LLC**
+CML Local Alpha narrows the existing CML workbench's validate/inspect/export
+pattern to local continuity documents. It reuses an unchanged dependency closure
+of CML Reference Compiler 1.2.0-alpha.0 and its canonical exporter. The local
+store and focused UI are product-specific. These statements are grounded in
+`evidence/COMPILER_PROVENANCE.json` and the supplied application, not a claim of
+validated runtime or behavioral outcomes.
 
-This page gives a reader context for CML Local Alpha: the engineering question
-that led to it, the evidence the Alpha currently provides, and the research
-direction it is intended to explore.
+## Evidence boundary
 
-It is not a product claim, a performance claim, or a statement that CML has
-solved a general problem. The project record should make its current limits as
-easy to inspect as its successful demonstrations.
+A PASS means static acceptance by CML Reference Compiler 1.2.0-alpha.0 only. It does not establish runtime execution, rendering, timing verification, safety certification, human-behavior proof, deployment, or launch authority.
 
-## Starting question
+A canonical plan or normalized IR describes compiler output; it does not render
+or execute a scene. Durations and reactions written in CML are source parameters,
+not measured timing or evidence about people. The application has no operational
+deployment or launch authorization function.
 
-A system can often describe its present state. The harder question comes after a
-proposed change fails:
+## Snapshot provenance and historical records
 
-1. What was the last accepted state?
-2. What precisely changed?
-3. Why was the proposed state rejected?
-4. Can another person inspect the same result later?
+The recorded snapshot identifies compiler version 1.2.0-alpha.0 and SHA-256
+hashes for 15 compiler/exporter/license/notice files. Hash checks establish byte
+identity with that recorded file set, not an independently authenticated upstream
+history. No upstream compiler commit ID is recorded in this provenance file;
+none is inferred or invented here. A package version is not a commit identifier.
+Its historical machine paths are retained unchanged as provenance, not setup
+instructions or prerequisites. Use your own extracted project directory.
 
-CML explores one narrow response: express continuity constraints in a document,
-validate the proposed state, retain the last accepted state when validation
-fails, and preserve evidence of both outcomes.
+The alpha.1 archive, checksum, manifest, tag, and preparation evidence remain
+historical records. Alpha.2 corrects documentation and packaging only. Historical
+fixtures/receipts retain original version labels, timestamps, and data. App and
+receipt version remain 0.1.0. Historical evidence does not certify today's Windows
+startup, rendering, or any operational behavior. Current verification records
+identify which checks actually ran.
 
-## Historical progression
+## Receipts and sharing
 
-### Continuity as an inspectable question
+Receipts are unsigned reproducibility records and may contain complete current and last-accepted source. Sanitize personal, proprietary, and research content before public sharing. Offline verification checks internal consistency with the bundled compiler, not authorship, time, custody, or external execution. Editing a receipt breaks its digest; use sample-only receipts for reproducible reports, or share a clearly labeled sanitized excerpt rather than claiming it is the original verified receipt.
 
-The work began from a practical concern: a change can be locally plausible yet
-still be wrong for the state in which it is applied. A later failed edit should
-not silently erase the conditions that made an earlier state acceptable.
+Recompute a sample receipt offline from the extracted project directory with
+`node verify-receipt.js RECEIPT.json`, using your actual path. SHA-256 detects
+changes relative to a recorded digest; it is not a signature or custody proof.
 
-This is not a claim to have invented continuity, validation, state machines, or
-provenance. It is a research question about how those established ideas can be
-made explicit, inspectable, and recoverable in a portable workflow.
+## Licensing limitation
 
-### Reference-compiler foundation
+The vendored compiler includes its Apache-2.0 LICENSE, NOTICE, and split-license
+policy in `vendor/compiler/`. Those records are preserved without modification.
+The supplied product files do not establish a separate product-wide license grant;
+this correction makes no new license decision and does not extend the compiler's
+license to every product document or asset. Broader redistribution rights remain
+unresolved where no applicable grant is recorded. No endorsement is implied.
 
-CML uses a reference compiler to parse and statically validate a continuity
-document. The compiler provides specific acceptance and rejection diagnostics.
-Static validation is useful evidence, but it does not establish runtime truth,
-renderer behavior, timing behavior, or safety.
-
-### Local accepted-state workflow
-
-CML Local Alpha puts that foundation into a local workflow:
-
-- edit or import a CML document;
-- validate the exact saved draft;
-- retain the last accepted state when a new draft fails;
-- keep a small history of checks; and
-- export an unsigned SHA-256 receipt containing source, diagnostics, normalized
-  state, and compiler provenance.
-
-The workflow is deliberately local: no cloud account, telemetry, or external
-service is required for the Alpha.
-
-### Public Alpha — 10 October 2026
-
-CML Local Alpha 0.1.0-alpha.1 was released as a Windows + WSL evaluation
-package. It includes a fixed archive, checksum, supplied fixtures, a
-10-minute test script, and a feedback channel.
-
-The release is an invitation to reproduce a narrow workflow. It is not a
-production certification.
-
-### Independent evaluation — current stage
-
-The first outside evaluation is intentionally small: five candid tester reports
-focused on four questions.
-
-- Is installation understandable?
-- Does retaining accepted state after a failed edit make sense?
-- Are the diagnostics clear enough to act on?
-- Is the resulting receipt useful to another engineer?
-
-Positive, negative, and inconclusive reports all belong in the project record.
-
-## Long-term research direction
-
-The long-term direction is a portable continuity and evidence layer for
-software and research workflows in which an invalid change should not replace a
-known-good state.
-
-Its working principle is:
-
-> **Known state. Verified change. Truthful recovery.**
-
-Future work may investigate host adapters, canonical accepted-state stores,
-derived projections, policy-bound changes, and reproducible evidence packages.
-Those are research directions, not capabilities established by this Alpha.
-
-### Supporting frontier work
-
-Work at the edge of engineering and science benefits when assumptions, state
-changes, constraints, and recovery evidence can be examined by others. CML's
-possible role is supportive: helping make that record explicit and portable.
-
-CML does not claim to identify discoveries, prove scientific results, certify
-runtime behavior, or authorize a deployment. Any stronger claim must be earned
-by a fixed implementation, retained evidence, independent replication, and
-clear scope limits.
-
-## What this Alpha establishes
-
-| Demonstrated in Alpha | Not established by Alpha |
-| --- | --- |
-| Local persistence of CML drafts | Runtime correctness |
-| Static compiler acceptance or rejection | Renderer or media behavior |
-| Preservation of the last accepted state after a failed edit | Timing or performance guarantees |
-| SHA-256 receipt generation and local receipt checking | Cryptographic signing or third-party attestation |
-| A reproducible tester workflow | Production readiness, physical safety, or launch authority |
-
-## Research record and attribution
-
-CML is a research and software project maintained by xSQUIB LLC. It is
-developed with AI-assisted engineering and is intended to remain inspectable,
-challengeable, and extensible by others.
-
-The public record should preserve the source version, tests, failures,
-replications, corrections, and contributor attribution needed to evaluate each
-claim. Evidence that contradicts a hypothesis is part of the research record,
-not something to remove.
-
-## Read next
-
-- [CML Local Alpha README](README.md)
-- [Tester instructions](TESTER_README.md)
-- [10-minute test script](tester/TEST_SCRIPT_10_MIN.md)
-- [Feedback template](tester/FEEDBACK_TEMPLATE.md)
-- [Release and fixed archive](https://github.com/cstolting-collab/CML-Local-Alpha/releases/tag/v0.1.0-alpha.1)
+See [README.md](README.md) for startup and [TESTER_README.md](TESTER_README.md)
+for the reproducible tester workflow. Storage remains local at
+`~/.local/share/cml-local-alpha/` or the existing `CML_ALPHA_DATA_DIR` override.

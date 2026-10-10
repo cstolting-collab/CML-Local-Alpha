@@ -1,21 +1,23 @@
-CML Local Alpha Windows desktop shortcut
+CML Local Alpha 0.1.0-alpha.2 Windows desktop shortcut
 
-See ../TESTER_README.md for complete prerelease requirements and setup.
-From Windows Explorer, open the extracted project's desktop folder through
-\\wsl.localhost\DISTRO\home\USER\...\desktop, then run
-Install-CML-Local-Alpha.ps1 with PowerShell. The installer discovers the
-WSL distribution, default Linux user, and project path from that location.
-It creates/updates CML Local Alpha.lnk on the actual Windows Desktop.
+Follow ../TESTER_README.md to verify/extract the archive under your WSL home.
+From the extracted project directory in WSL, run:
+explorer.exe "$(wslpath -w "$PWD/desktop")"
+In that Explorer folder, right-click Install-CML-Local-Alpha.ps1 and choose
+Run with PowerShell. The unchanged installer detects the WSL distribution,
+default Linux user, and extracted project path and creates/updates the
+CML Local Alpha shortcut on your actual Windows Desktop.
 
-Original project install command (Windows PowerShell):
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "\\wsl.localhost\Ubuntu\home\cherie\cml-private-research\products\CML_LOCAL_ALPHA_20261010\desktop\Install-CML-Local-Alpha.ps1"
+Alternative in Windows PowerShell (replace FULL_WSL_UNC_PATH with your path):
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "FULL_WSL_UNC_PATH\desktop\Install-CML-Local-Alpha.ps1"
 
-Repeated clicks serialize startup and reuse the server. Browser windows may
-open for each click. The unchanged server binds only to 127.0.0.1:4180 and
-retains its existing document directory. Existing Node/nvm and flock are used.
-Launcher logs: /tmp/cml-local-alpha-launch-UID/server.log (UID from id -u).
-Server remains running after the launcher exits.
+Repeated clicks serialize startup and reuse the server, which binds only to
+127.0.0.1:4180. It stays running after the launcher exits. Startup errors remain
+visible. Fallback from the extracted project in WSL: bash desktop/ensure-server.sh.
+Documents stay in ~/.local/share/cml-local-alpha/ unless CML_ALPHA_DATA_DIR is
+set. See TESTER_README.md for requirements, safe stopping, and receipt guidance.
+Installer logic is unchanged; manually verify Windows access on your machine.
 
-Windows installation/browser/live loopback checks were blocked during
-preparation by WSL interoperability socket failure and loopback EPERM.
-The portable installer has been inspected but not executed on Windows.
+A PASS means static acceptance by CML Reference Compiler 1.2.0-alpha.0 only. It does not establish runtime execution, rendering, timing verification, safety certification, human-behavior proof, deployment, or launch authority.
+
+See ../WHY_CML.md for project history and evidence boundaries.
