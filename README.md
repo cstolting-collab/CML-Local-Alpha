@@ -7,7 +7,7 @@ compiler accepted the document's static rules. Plans, IR, and unsigned receipts
 are inspection artifacts. No cloud, account, telemetry, or package installation
 is required.
 
-Requires Node.js 18.19 or newer.
+For the project history, evidence boundaries, and long-term research direction, read [CML: Historical Context and Research Direction](WHY_CML.md).\n\nRequires Node.js 18.19 or newer.
 
 ## Windows + WSL Start
 
