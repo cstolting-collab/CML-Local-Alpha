@@ -1,0 +1,211 @@
+{
+  "format": "CML-Local-Verification-Receipt",
+  "schemaVersion": 1,
+  "appVersion": "0.1.0",
+  "exportedAt": "2026-10-10T06:49:32.461Z",
+  "scope": "Static CML document validation; no runtime execution, renderer verification, timing guarantee, or launch authority.",
+  "verdict": "FAIL",
+  "document": {
+    "id": "8c283d5e-faf3-46eb-8f7d-2668dbbcd838",
+    "title": "Natural continuity",
+    "revision": 2,
+    "source": "◎C my_scene {\n  □L target=character\n  ~F target=camera mode=slow\n  ♪V text=\"The whole mountain listens.\" words=5 speed=0.95\n  |P duration=2200ms\n  ·S duration=1800ms zero=true\n  ⌒R type=smile delay=900ms settle=1200ms hold=true\n  ↑L target=-23LUFS after=continuity\n}",
+    "sourceSha256": "8a22e96ce0d393733ea153b76bc7ffc09aa949243381d8ba8b7f3441c03159be"
+  },
+  "validation": {
+    "valid": false,
+    "sourceSha256": "8a22e96ce0d393733ea153b76bc7ffc09aa949243381d8ba8b7f3441c03159be",
+    "compilerVersion": "1.2.0-alpha.0",
+    "issues": [
+      {
+        "code": "CML-E109",
+        "severity": "error",
+        "message": "Block 'my_scene' requires LOCK target=world.",
+        "location": {
+          "line": 1,
+          "column": 1
+        },
+        "source": null
+      }
+    ],
+    "ir": null,
+    "canonical": null,
+    "irSha256": null,
+    "revision": 2,
+    "validatedAt": "2026-10-10T06:49:32.454Z"
+  },
+  "lastAccepted": {
+    "valid": true,
+    "sourceSha256": "06e39898ddfa7121235ef27f0673f7cb5ef98eaa56431d9b5ec2c6d4da4f611e",
+    "compilerVersion": "1.2.0-alpha.0",
+    "issues": [],
+    "ir": {
+      "format": "CML-IR",
+      "version": "1.0.0",
+      "source_cml_version": "1.0.0",
+      "execution_order": [
+        "lock",
+        "flow",
+        "voice",
+        "count",
+        "pause",
+        "silence",
+        "reaction",
+        "transition",
+        "loudness_lift",
+        "validate"
+      ],
+      "projects": [
+        {
+          "id": "project_001",
+          "scenes": [
+            {
+              "id": "my_scene",
+              "type": "continuity_scene",
+              "parameters": {},
+              "entities": {
+                "characters": [
+                  "character"
+                ],
+                "worlds": [
+                  "world"
+                ]
+              },
+              "instructions": [
+                {
+                  "id": "lock_001",
+                  "type": "lock",
+                  "symbol": "□L",
+                  "keyword": "LOCK",
+                  "source": {
+                    "line": 2,
+                    "column": 1
+                  },
+                  "target": "character",
+                  "mode": "strict"
+                },
+                {
+                  "id": "lock_002",
+                  "type": "lock",
+                  "symbol": "□L",
+                  "keyword": "LOCK",
+                  "source": {
+                    "line": 3,
+                    "column": 1
+                  },
+                  "target": "world",
+                  "mode": "strict"
+                },
+                {
+                  "id": "flow_003",
+                  "type": "flow",
+                  "symbol": "~F",
+                  "keyword": "FLOW",
+                  "source": {
+                    "line": 4,
+                    "column": 1
+                  },
+                  "target": "camera",
+                  "mode": "slow"
+                },
+                {
+                  "id": "voice_004",
+                  "type": "voice",
+                  "symbol": "♪V",
+                  "keyword": "VOICE",
+                  "source": {
+                    "line": 5,
+                    "column": 1
+                  },
+                  "text": "The whole mountain listens.",
+                  "max_words": 5,
+                  "speed": 0.95
+                },
+                {
+                  "id": "pause_005",
+                  "type": "pause",
+                  "symbol": "|P",
+                  "keyword": "PAUSE",
+                  "source": {
+                    "line": 6,
+                    "column": 1
+                  },
+                  "duration_ms": 2200
+                },
+                {
+                  "id": "silence_006",
+                  "type": "silence",
+                  "symbol": "·S",
+                  "keyword": "SILENCE",
+                  "source": {
+                    "line": 7,
+                    "column": 1
+                  },
+                  "duration_ms": 1800,
+                  "true_zero_amplitude": true
+                },
+                {
+                  "id": "reaction_007",
+                  "type": "reaction",
+                  "symbol": "⌒R",
+                  "keyword": "REACTION",
+                  "source": {
+                    "line": 8,
+                    "column": 1
+                  },
+                  "reaction_type": "smile",
+                  "trigger": null,
+                  "delay_ms": 900,
+                  "settle_ms": 1200,
+                  "hold": true
+                },
+                {
+                  "id": "loudness_lift_008",
+                  "type": "loudness_lift",
+                  "symbol": "↑L",
+                  "keyword": "LIFT",
+                  "source": {
+                    "line": 9,
+                    "column": 1
+                  },
+                  "target_lufs": -23,
+                  "after": "continuity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical": "CML CANONICAL CONTINUITY PLAN\nVersion: 1.0.0\n\nSCENE my_scene\nLOCK id=\"lock_001\" mode=\"strict\" target=\"character\"\nLOCK id=\"lock_002\" mode=\"strict\" target=\"world\"\nFLOW id=\"flow_003\" mode=\"slow\" target=\"camera\"\nVOICE id=\"voice_004\" max_words=5 speed=0.95 text=\"The whole mountain listens.\"\nPAUSE duration_ms=2200 id=\"pause_005\"\nSILENCE duration_ms=1800 id=\"silence_006\" true_zero_amplitude=true\nREACTION delay_ms=900 hold=true id=\"reaction_007\" reaction_type=\"smile\" settle_ms=1200 trigger=null\nLOUDNESS_LIFT after=\"continuity\" id=\"loudness_lift_008\" target_lufs=-23\n\nCONTINUITY FIRST. TRANSFORMATION AFTER VALIDATION.",
+    "irSha256": "8c9df72bba8d148f77d22e3416ecd016f62380fc9a14f06189a0c002b002693d",
+    "revision": 1,
+    "validatedAt": "2026-10-10T06:49:32.421Z",
+    "source": "◎C my_scene {\n  □L target=character\n  □L target=world\n  ~F target=camera mode=slow\n  ♪V text=\"The whole mountain listens.\" words=5 speed=0.95\n  |P duration=2200ms\n  ·S duration=1800ms zero=true\n  ⌒R type=smile delay=900ms settle=1200ms hold=true\n  ↑L target=-23LUFS after=continuity\n}",
+    "title": "Natural continuity"
+  },
+  "compiler": {
+    "version": "1.2.0-alpha.0",
+    "fingerprintSha256": "3922c056d9bafa93e3abd18adec531b3ced884d604851c8033daad9a11935179",
+    "files": {
+      "src/compiler.js": "e7eeafd49a0b989aae9de2e65e0f79789baff9bac5ca36f915c792062b1344a6",
+      "src/parser.js": "eaa3111a94aa6a330d6a7ac61eaec2ec64cccb138936f3216da563fbd5a2ac33",
+      "src/validator.js": "1d6f9ae4e2560634761296669862824b2df2dd3db8718fd505c29a784a163456",
+      "src/ir.js": "77051f9c84a1592c32ccbd901e9f0792c563588418170a94912dd490f7007b22",
+      "src/tokenizer.js": "e598fa2fd1a7bddcd5ac5e956f5c8062397c80a7695033d0360ef87c923b2152",
+      "src/errors.js": "2fdef4e7bc8911071b895601ba94a3efd29981069c0bf8ba2c8d40ac32768d90",
+      "src/resource-policy.js": "e6e3ef0f4e6546ad56b9efb47a0bd164959b0e99f220b6ee03cd37433338c0f2",
+      "src/ast-contract.js": "e11e64114d6470c1592135938785f56dc846399011ccfc2aec6389a29e0bc8ab",
+      "src/language.js": "a165126c77001d356221aad5ca8cc19c09ea5ddcfc20d4be157c5253675a5bc3",
+      "src/version.js": "5234c0a46ed6e09fe2901835086686128c8143b6ae8bbbc453e05813cee83d0d",
+      "src/specification.js": "859e4bda1e1a5f71c61cc4819837bbaa084aa56c9108528bff731754534fd920",
+      "exporters/canonical-text.js": "597eaac2ad808b2ef50feada7170da4f4f7182810971533f014f327a0cd742e1",
+      "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "NOTICE": "08f16e01de07fdada65e87776be1d0711bf793441509bcabe306887156bec21b",
+      "LICENSES.md": "6e38bc488be5d0f850388342d34fbdda1e4dd494bb0eb1ac9f72706909e71089"
+    }
+  },
+  "localOnly": true,
+  "launchAuthorized": false,
+  "receiptSha256": "d5383f15bd68315e72294a38f2c5bee534e8abb41b6b2e4359de7919099854a7"
+}

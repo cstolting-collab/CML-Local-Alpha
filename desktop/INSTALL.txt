@@ -1,0 +1,21 @@
+CML Local Alpha Windows desktop shortcut
+
+See ../TESTER_README.md for complete prerelease requirements and setup.
+From Windows Explorer, open the extracted project's desktop folder through
+\\wsl.localhost\DISTRO\home\USER\...\desktop, then run
+Install-CML-Local-Alpha.ps1 with PowerShell. The installer discovers the
+WSL distribution, default Linux user, and project path from that location.
+It creates/updates CML Local Alpha.lnk on the actual Windows Desktop.
+
+Original project install command (Windows PowerShell):
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "\\wsl.localhost\Ubuntu\home\cherie\cml-private-research\products\CML_LOCAL_ALPHA_20261010\desktop\Install-CML-Local-Alpha.ps1"
+
+Repeated clicks serialize startup and reuse the server. Browser windows may
+open for each click. The unchanged server binds only to 127.0.0.1:4180 and
+retains its existing document directory. Existing Node/nvm and flock are used.
+Launcher logs: /tmp/cml-local-alpha-launch-UID/server.log (UID from id -u).
+Server remains running after the launcher exits.
+
+Windows installation/browser/live loopback checks were blocked during
+preparation by WSL interoperability socket failure and loopback EPERM.
+The portable installer has been inspected but not executed on Windows.

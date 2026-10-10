@@ -1,0 +1,23 @@
+{
+  "source": "/home/cherie/projects/CML-Reference-Compiler",
+  "package_version": "1.2.0-alpha.0",
+  "files": {
+    "src/compiler.js": "e7eeafd49a0b989aae9de2e65e0f79789baff9bac5ca36f915c792062b1344a6",
+    "src/parser.js": "eaa3111a94aa6a330d6a7ac61eaec2ec64cccb138936f3216da563fbd5a2ac33",
+    "src/validator.js": "1d6f9ae4e2560634761296669862824b2df2dd3db8718fd505c29a784a163456",
+    "src/ir.js": "77051f9c84a1592c32ccbd901e9f0792c563588418170a94912dd490f7007b22",
+    "src/tokenizer.js": "e598fa2fd1a7bddcd5ac5e956f5c8062397c80a7695033d0360ef87c923b2152",
+    "src/errors.js": "2fdef4e7bc8911071b895601ba94a3efd29981069c0bf8ba2c8d40ac32768d90",
+    "src/resource-policy.js": "e6e3ef0f4e6546ad56b9efb47a0bd164959b0e99f220b6ee03cd37433338c0f2",
+    "src/ast-contract.js": "e11e64114d6470c1592135938785f56dc846399011ccfc2aec6389a29e0bc8ab",
+    "src/language.js": "a165126c77001d356221aad5ca8cc19c09ea5ddcfc20d4be157c5253675a5bc3",
+    "src/version.js": "5234c0a46ed6e09fe2901835086686128c8143b6ae8bbbc453e05813cee83d0d",
+    "src/specification.js": "859e4bda1e1a5f71c61cc4819837bbaa084aa56c9108528bff731754534fd920",
+    "exporters/canonical-text.js": "597eaac2ad808b2ef50feada7170da4f4f7182810971533f014f327a0cd742e1",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "NOTICE": "08f16e01de07fdada65e87776be1d0711bf793441509bcabe306887156bec21b",
+    "LICENSES.md": "6e38bc488be5d0f850388342d34fbdda1e4dd494bb0eb1ac9f72706909e71089"
+  },
+  "workbench_inspected": "/home/cherie/projects/CML-Reference-Compiler/cml-workbench",
+  "reuse": "Unchanged compiler dependency closure and canonical exporter. Product-specific local store and focused UI; workbench validate/inspect/export pattern reused."
+}

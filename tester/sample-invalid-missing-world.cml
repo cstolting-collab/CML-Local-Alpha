@@ -1,0 +1,9 @@
+◎C my_scene {
+  □L target=character
+  ~F target=camera mode=slow
+  ♪V text="The whole mountain listens." words=5 speed=0.95
+  |P duration=2200ms
+  ·S duration=1800ms zero=true
+  ⌒R type=smile delay=900ms settle=1200ms hold=true
+  ↑L target=-23LUFS after=continuity
+}
