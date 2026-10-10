@@ -7,16 +7,17 @@ compiler accepted the document's static rules. Plans, IR, and unsigned receipts
 are inspection artifacts. No cloud, account, telemetry, or package installation
 is required.
 
-## Windows + WSL start
+Requires Node.js 18.19 or newer.
 
-Use existing Windows 10/11 with WSL 2, Ubuntu, a non-root default WSL user,
-Windows PowerShell 5.1, and a modern browser. WSL needs Node.js >=18.19, bash,
-flock, and tar; existing nvm installations are supported. WSL interoperability
-and localhost forwarding must work. Port 4180 must be available or already
-serving this app. Complete setup is in [TESTER_README.md](TESTER_README.md).
+## Windows + WSL Start
 
-Verify the downloaded prerelease archive against its adjacent `.sha256` file
-using Windows PowerShell:
+Use an existing Windows 10/11 system with WSL 2, an Ubuntu distribution, a non-root default WSL user, Windows PowerShell 5.1, and a modern browser. WSL must have Node.js ≥ 18.19, bash, flock, and tar available (nvm installations are supported). WSL interoperability and localhost forwarding must work. Port 4180 must be free or already serving this application.
+
+Complete tester-oriented instructions are in [TESTER_README.md](TESTER_README.md).
+
+### Verify and extract
+
+Verify the prerelease archive against its adjacent `.sha256` file:
 
 ```powershell
 Get-FileHash .\cml-local-alpha-0.1.0-alpha.1.tar.gz -Algorithm SHA256
