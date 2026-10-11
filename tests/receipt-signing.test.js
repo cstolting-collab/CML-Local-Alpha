@@ -418,3 +418,21 @@ test('server refuses a configured missing or invalid signing key before listenin
   }
   await assert.rejects(stat(dataPath), { code: 'ENOENT' });
 });
+
+test('a FIFO configured as a private key is rejected without blocking startup', async t => {
+  if (process.platform === 'win32') { t.skip('Private-key files require POSIX; the native Windows refusal is tested separately.'); return; }
+  const fifo = join(await temporary(t), 'key-fifo');
+  const created = spawnSync('mkfifo', [fifo], { encoding: 'utf8' });
+  if (created.error?.code === 'ENOENT') { t.skip('The optional POSIX mkfifo test utility is unavailable.'); return; }
+  assert.ifError(created.error);
+  assert.equal(created.status, 0, created.stderr);
+  const result = spawnSync(process.execPath, [join(root, 'server.js')], {
+    cwd: root, encoding: 'utf8', timeout: 5000,
+    env: { ...process.env, CML_RECEIPT_SIGNING_KEY: fifo },
+  });
+  assert.ifError(result.error);
+  assert.equal(result.status, 1, result.stderr);
+  assert.equal(result.signal, null);
+  assert.equal(result.stdout, '');
+  assert.match(result.stderr, /regular file/);
+});

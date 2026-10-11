@@ -1,4 +1,5 @@
 import { createHash, createPrivateKey, createPublicKey, generateKeyPairSync, KeyObject } from 'node:crypto';
+import { constants } from 'node:fs';
 import { mkdir, open, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 
@@ -34,7 +35,9 @@ function requirePrivateKeyFilesystem() {
 
 export async function loadPrivateSigningKey(path) {
   requirePrivateKeyFilesystem();
-  const file = await open(path, 'r');
+  // Nonblocking open lets the regular-file check reject FIFOs without waiting
+  // for another process to write to them.
+  const file = await open(path, constants.O_RDONLY | constants.O_NONBLOCK);
   try {
     const info = await file.stat();
     if (!info.isFile()) throw new Error('Signing key path must name a regular file.');
