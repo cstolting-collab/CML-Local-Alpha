@@ -4,6 +4,7 @@ import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DocumentStore, AppError } from './store.js';
+import { loadPrivateSigningKey } from './receipt-keys.js';
 const directory = fileURLToPath(new URL('./public/', import.meta.url));
 export async function readJson(request) {
   let size = 0; const chunks = [];
@@ -44,8 +45,12 @@ export function createHandler(store, expectedHost = '127.0.0.1:4180') {
   };
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const data = process.env.CML_ALPHA_DATA_DIR || join(homedir(), '.local', 'share', 'cml-local-alpha');
-  const server = createServer(createHandler(new DocumentStore(data)));
-  server.on('error', error => { console.error(`Unable to start local server: ${error.message}`); process.exitCode = 1; });
-  server.listen(4180, '127.0.0.1', () => console.log(`CML Local Alpha: http://127.0.0.1:4180\nDocuments: ${data}\nPress Ctrl+C to stop.`));
+  try {
+    const data = process.env.CML_ALPHA_DATA_DIR || join(homedir(), '.local', 'share', 'cml-local-alpha');
+    const keyPath = process.env.CML_RECEIPT_SIGNING_KEY;
+    const signingKey = keyPath === undefined ? undefined : await loadPrivateSigningKey(keyPath);
+    const server = createServer(createHandler(new DocumentStore(data, { signingKey })));
+    server.on('error', error => { console.error(`Unable to start local server: ${error.message}`); process.exitCode = 1; });
+    server.listen(4180, '127.0.0.1', () => console.log(`CML Local Alpha: http://127.0.0.1:4180\nDocuments: ${data}\nReceipts: ${signingKey ? 'signed with configured local key' : 'unsigned'}\nPress Ctrl+C to stop.`));
+  } catch (error) { console.error(`Unable to start local server: ${error.message}`); process.exitCode = 1; }
 }

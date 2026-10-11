@@ -74,13 +74,39 @@ The unchanged compiler snapshot is CML Reference Compiler `1.2.0-alpha.0`.
 and notices are under `vendor/compiler/`. No robotics telemetry, launch control,
 or benchmark components are included.
 
-Receipts are unsigned reproducibility records and may contain complete current and last-accepted source. Sanitize personal, proprietary, and research content before public sharing. Offline verification checks internal consistency with the bundled compiler, not authorship, time, custody, or external execution. Editing a receipt breaks its digest; use sample-only receipts for reproducible reports, or share a clearly labeled sanitized excerpt rather than claiming it is the original verified receipt.
+Receipts are reproducibility records and may include complete current and
+last-accepted source. The published alpha.2 archives produce unsigned receipts.
+This source checkout also supports optional local Ed25519 signing: configure
+`CML_RECEIPT_SIGNING_KEY` when starting the server to sign new exports, or sign
+a separate copy using `sign-receipt.js`. A configured invalid or unavailable
+key stops startup rather than falling back to unsigned exports. See
+[receipt signing and trust](RECEIPT_SIGNING.md) for owner-local key setup,
+commands, and replacement guidance.
+
+Offline verification rechecks internal consistency with the bundled compiler.
+A signature verified against an independently trusted public key additionally
+authenticates that key holder's endorsement. It does not establish the
+document's original author, creation time, custody, or external execution.
+Prepare sample-only content before exporting for public sharing. Altering a
+receipt body invalidates its existing digest and signature, if present; label any
+sanitized excerpt clearly rather than presenting it as the original receipt.
 
 From your extracted project directory, use the actual downloaded receipt path:
 
 ```bash
 node verify-receipt.js /mnt/c/Users/YOUR_WINDOWS_USER/Downloads/RECEIPT.json
 ```
+
+For a signed receipt, supply the public key confirmed separately with its owner:
+
+```bash
+node verify-receipt.js SIGNED.json --trusted-key /path/to/confirmed/signing.public.pem
+```
+
+`--trusted-key` requires a signature and rejects unsigned receipts. Verification
+reports `authentication.status` as `trusted-signature` or `unsigned` separately
+from the receipt's PASS/FAIL verdict. Both modes keep
+`externalExecutionVerified` false.
 
 ## Verification and feedback
 

@@ -1,7 +1,9 @@
 # CML Local Alpha 0.1 — five-tester engineering prerelease
 
-Build: `0.1.0-alpha.2` (2026-10-10); app/receipt version remains `0.1.0`.
+Published archive: `0.1.0-alpha.2` (2026-10-10); app/receipt version remains `0.1.0`.
 For testers T01–T05. Documentation-and-packaging correction; app/receipt version remains unchanged.
+The optional signing feature in this source checkout is not included in that
+unchanged published archive; see [Receipt guidance](#receipt-guidance).
 
 **Local-only static validation.** A PASS means static acceptance by CML Reference Compiler 1.2.0-alpha.0 only. It does not establish runtime execution, rendering, timing verification, safety certification, human-behavior proof, deployment, or launch authority.
 
@@ -59,11 +61,36 @@ Do not terminate unrelated Node processes.
 
 ## Receipt guidance
 
-Receipts are unsigned reproducibility records and may contain complete current and last-accepted source. Sanitize personal, proprietary, and research content before public sharing. Offline verification checks internal consistency with the bundled compiler, not authorship, time, custody, or external execution. Editing a receipt breaks its digest; use sample-only receipts for reproducible reports, or share a clearly labeled sanitized excerpt rather than claiming it is the original verified receipt.
+The published alpha.2 archives and supplied sample receipts remain unsigned.
+This source checkout also supports optional local Ed25519 signing. Follow
+[receipt signing and trust](RECEIPT_SIGNING.md) to create a key on its owner's
+computer, start a signing server, or sign a separate copy of a receipt. Keep
+private keys outside the repository and document storage; on Windows, use the
+private WSL home directory. A configured invalid or unavailable signing key
+stops server startup, with no unsigned fallback.
+
+Receipts may contain complete current and last-accepted source. Use sample-only
+content before exporting for public sharing. Altering a receipt body invalidates
+its existing digest and signature, if present. Share a clearly labeled
+sanitized excerpt rather than presenting it as the original verified receipt.
 
 From the extracted project root, run
 `node verify-receipt.js /mnt/c/Users/YOUR_WINDOWS_USER/Downloads/RECEIPT.json`
 with your actual receipt filename.
+
+For a signed receipt, use
+`node verify-receipt.js SIGNED.json --trusted-key /path/to/confirmed/signing.public.pem`.
+Obtain and confirm this public key independently of the receipt. Supplying
+`--trusted-key` rejects unsigned receipts; a signed receipt also requires that
+option. Verification reports authentication status as `trusted-signature` or `unsigned`
+separately from the static PASS/FAIL verdict.
+
+Verification rechecks consistency with the bundled compiler. A trusted
+signature authenticates the key holder's endorsement, not the original
+author's identity, creation time, or custody. Signing a legacy receipt creates
+a new endorsement and preserves the original. Both modes report
+`externalExecutionVerified: false`; external execution requires evidence from
+the producing system.
 
 ## Verification limits
 

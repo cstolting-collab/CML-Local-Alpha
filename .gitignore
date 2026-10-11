@@ -1,0 +1,2 @@
+# Owner signing keys must stay outside version control.
+*.private.pem
