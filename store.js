@@ -2,6 +2,8 @@ import { mkdir, readFile, readdir, open, rename, unlink } from 'node:fs/promises
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { validateDocument, hash, fingerprint, provenance, SAMPLE } from './validator.js';
+import { privateSigningKey } from './receipt-keys.js';
+import { signReceipt } from './receipt-signature.js';
 export class AppError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
@@ -10,7 +12,10 @@ function checkDraft(title, source) {
   if (typeof source !== 'string' || Buffer.byteLength(source) > 262144) throw new AppError(413, 'Document must be UTF-8 text no larger than 256 KiB.');
 }
 export class DocumentStore {
-  constructor(directory) { this.directory = directory; this.queue = Promise.resolve(); }
+  constructor(directory, { signingKey } = {}) {
+    this.directory = directory; this.queue = Promise.resolve();
+    this.signingKey = signingKey === undefined ? undefined : privateSigningKey(signingKey);
+  }
   serial(action) { const next = this.queue.then(action); this.queue = next.catch(() => {}); return next; }
   path(id) {
     if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(id)) throw new AppError(400, 'Invalid document ID.');
@@ -76,6 +81,7 @@ export class DocumentStore {
       verdict: v.valid ? 'PASS' : 'FAIL', document: { id: d.id, title: d.title, revision: d.revision, source: d.source, sourceSha256: v.sourceSha256 },
       validation: v, lastAccepted: d.accepted, compiler: { version: v.compilerVersion, fingerprintSha256: fingerprint, files: provenance.files },
       localOnly: true, launchAuthorized: false };
-    return { ...result, receiptSha256: hash(JSON.stringify(result)) };
+    const receipt = { ...result, receiptSha256: hash(JSON.stringify(result)) };
+    return this.signingKey === undefined ? receipt : signReceipt(receipt, this.signingKey);
   }); }
 }
